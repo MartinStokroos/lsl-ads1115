@@ -38,10 +38,10 @@ If your sensor outputs **2.5 V at zero response**, the potentiometer can be used
 
 ### Alternative: Single-ended inputs
 
-You can use `AIN1` and `AIN3` as single-ended inputs by tying:
+You can use `AIN0` and `AIN2` as single-ended inputs by tying:
 
-* `AIN0` → GND
-* `AIN2` → GND
+* `AIN1` → GND
+* `AIN3` → GND
 
 Refer to the ADS1115 datasheet for electrical limits.
 
@@ -53,30 +53,29 @@ Refer to the ADS1115 datasheet for electrical limits.
 
 Interfaces the ADS1115 with the PC and streams:
 
-* **2 differential channels**
-* **100 Hz per channel**
+* 2 differential channels
+* 100 Hz per channel
 * Stable, timing-controlled data transmission
 
 Designed to maintain a constant sampling interval.
-
----
 
 ### 2. `dummy-sampler`
 
 Does **not** require the ADC.
 
-Generates two independent sine waves for:
+Generates two independent sine waves (1Hz and 6Hz by default) for:
 
 * Testing serial communication
-* Verifying LSL streaming
+* Verifying LSL streaming at 100Hz rate
 * Evaluating signal integrity (e.g., via FFT)
 
 You can analyze the received signal using Brain Products' LSL Viewer.
+
 ![FFT with BrainVision Viewer](BrainVisionScr.png)
 
 ---
 
-## Configuration
+## Sampler Sketch Configuration
 
 ### Adjusting the input voltage Range (Gain)
 
@@ -98,8 +97,6 @@ Available gain settings:
 | `GAIN_SIXTEEN`   | ±0.256 V         |                                   |
 
 Always ensure input voltages remain within safe limits!
-
----
 
 ### Adjust Sampling Rate
 
@@ -125,6 +122,10 @@ Two receiver programs are included:
 
 * `ads1115_rx.py` → Communication test tool
 * `ads1115_lsl` → Actual LSL stream outlet
+
+The CL input argument here is the serial port name e.g.:
+
+`python3 ads1115_lsl.py /dev/ttyACM0`
 
 During startup (Arduino reset), a few packets may be dropped. The stream stabilizes automatically after initialization.
 

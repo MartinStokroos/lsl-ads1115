@@ -5,7 +5,7 @@
 """
 Example program for receiving a sampled stream
 from the Arduino ads1115-sampler sketch and print
-the data to the screen.
+the raw ADC data to the screen.
 """
 
 from time import perf_counter

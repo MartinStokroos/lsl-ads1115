@@ -133,9 +133,10 @@ def main():
                         ch1 = bytes_to_int16(ch1L, ch1H)
                         ch2 = bytes_to_int16(ch2L, ch2H)
 
-                        # do unit conversion here:
-                        ch1 = ch1 * 2048/65536.0; # converting to miliVolts
-                        ch2 = ch2 * 2048/65536.0;  
+                        # do the unit conversion here:
+                        ch1 = ch1 * 2048/32768.0; # convert to milliVolts
+                        ch2 = ch2 * 2048/32768.0;
+                        
                         # Push sample with precise LSL timestamp
                         outlet.push_sample([ch1, ch2], local_clock())                        
 

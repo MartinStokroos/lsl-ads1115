@@ -104,10 +104,7 @@ void loop() {
 
   digitalWrite(debugPin, LOW); // toggle pin for timing validation.
 
-  // Maintain ~1ms loop time
-  while (nextLoop > micros()) 
-  {
-    ;
-  }
+  // Maintain ~200us loop time
+  while (nextLoop > micros()) {;}
   nextLoop += T_LOOP_US;  // Set next loop time
 }
